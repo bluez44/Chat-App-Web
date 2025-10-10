@@ -7,4 +7,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --chat-bg: #252728;
+  --btn-border: #3b3d3e;
+  --btn-border-hover: #606060;
 }
