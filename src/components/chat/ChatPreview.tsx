@@ -1,7 +1,7 @@
-import type { chatPreviewModel } from "../constant/model/chat";
-import { TimeFromNowToProvidedDate } from "../lib/utils/timeConvert";
+import type { ChatPreviewModel } from "../../constant/model/chat";
+import { TimeFromNowToProvidedDate } from "../../lib/utils/TimeConvert";
 
-function ChatPreview(chat: chatPreviewModel) {
+function ChatPreview(chat: ChatPreviewModel) {
   return (
     <div className="flex w-full gap-3 text-white items-center p-2 hover:bg-[var(--btn-border)] hover:cursor-pointer duration-300 rounded">
       <div className="flex-1 rounded-full">

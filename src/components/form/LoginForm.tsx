@@ -1,11 +1,19 @@
-import type { loginFormModel } from "../constant/model/login";
-import { login } from "../lib/api/auth";
-import { loginSchema } from "../validation/authSchema";
+import type { loginFormModel } from "../../constant/model/auth";
+import { loginApi } from "../../lib/api/auth";
+import { loginSchema } from "../../validation/authSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { Eye } from "lucide-react";
+import { createToastMessage } from "../../lib/utils/ToastMessage";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -22,10 +30,17 @@ function LoginForm() {
   const onSubmit = async (data: loginFormModel) => {
     setServerError(null);
     try {
-      await login(data);
+      await loginApi(data);
+      createToastMessage("Login successfully!", "success");
+      setTimeout(() => navigate("/chats"), 2000);
     } catch (error) {
-      console.log(error);
-      setServerError("Username or password is incorrect!");
+      if (axios.isAxiosError(error)) {
+        setServerError("Username or password is incorrect!");
+        createToastMessage(
+          `An error occurred: ${error.response?.data.message}`,
+          "error"
+        );
+      }
     }
   };
 
@@ -52,26 +67,37 @@ function LoginForm() {
         />
       </div>
 
-      <div className="mb-6">
+      <div className="mb-4">
         <label
           htmlFor="password"
           className="block text-gray-700 font-medium mb-2"
         >
           Your Password
         </label>
-        <input
-          id="password"
-          type="password"
-          {...register("password")}
-          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-            errors.password
-              ? "border-red-500 focus:ring-red-300"
-              : "border-gray-300 focus:ring-blue-300"
-          }`}
-        />
+        <div className="relative">
+          <div className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer">
+            {showPassword ? (
+              <Eye onClick={() => setShowPassword(!showPassword)} />
+            ) : (
+              <Eye onClick={() => setShowPassword(!showPassword)} />
+            )}
+          </div>
+          <input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            {...register("password")}
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+              errors.password
+                ? "border-red-500 focus:ring-red-300"
+                : "border-gray-300 focus:ring-blue-300"
+            }`}
+          />
+        </div>
       </div>
 
-      {serverError && <p className="text-red-500 text-center mb-4">{serverError}</p>}
+      {serverError && (
+        <p className="text-red-500 text-center mb-4">{serverError}</p>
+      )}
 
       <button
         type="submit"
