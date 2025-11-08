@@ -8,7 +8,17 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --chat-bg: #252728;
-  --btn-border: #3b3d3e;
+  --chat-bg: #FFFFFF;
+  --input-color: #747881;
+  --btn-border: #DBDDE1;
   --btn-border-hover: #606060;
+  --main-text: #080707;
+  --accent-primary-pressed: #004CCC;
+  --text-high-emphasis: #080707;
+  --text-low-emphasis: #747881;
+  --input-bg: #E9EAED;
+}
+
+.messages::-webkit-scrollbar {
+  display: none;
 }

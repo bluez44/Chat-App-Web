@@ -4,6 +4,7 @@ interface ChatPreviewModel {
   name: string;
   latestMessage: string;
   latestMessageTime: Date;
+  isRead?: boolean;
 }
 
 interface MessageModel {
@@ -11,6 +12,13 @@ interface MessageModel {
   sender: string;
   content: string;
   time: Date;
+  avatar?: string;
 }
 
-export type { ChatPreviewModel, MessageModel };
+interface selectedChatGroupModel {
+  id: number;
+  avatar: string;
+  name: string;
+}
+
+export type { ChatPreviewModel, MessageModel, selectedChatGroupModel };

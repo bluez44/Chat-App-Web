@@ -6,6 +6,7 @@ import Chats from "./pages/common/Chats";
 import Register from "./pages/auth/Register";
 import { ToastContainer } from "react-toastify";
 import { CookiesProvider } from "react-cookie";
+import AuthLayout from "./components/layout/AuthLayout";
 
 function App() {
   return (
@@ -15,11 +16,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/chats" element={<Chats />} />
-          <Route path="/auth">
-            <Route index path="/auth/login" element={<Login />} />
-            <Route path="/auth/register" element={<Register />} />
-            <Route index path="/auth/*" element={<h1>404</h1>} />
+
+          <Route path="/auth" element={<AuthLayout />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="*" element={<h1>404</h1>} />
           </Route>
+          
           <Route path="/*" element={<h1>404</h1>} />
         </Routes>
       </CookiesProvider>
