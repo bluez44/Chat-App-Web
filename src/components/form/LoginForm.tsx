@@ -4,7 +4,7 @@ import { loginSchema } from "../../validation/authSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { Eye } from "lucide-react";
+import { Eye, EyeClosed } from "lucide-react";
 import { createToastMessage } from "../../lib/utils/ToastMessage";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -32,7 +32,7 @@ function LoginForm() {
     try {
       await loginApi(data);
       createToastMessage("Login successfully!", "success");
-      setTimeout(() => navigate("/chats"), 2000);
+      navigate("/chats");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setServerError("Username or password is incorrect!");
@@ -79,7 +79,7 @@ function LoginForm() {
             {showPassword ? (
               <Eye onClick={() => setShowPassword(!showPassword)} />
             ) : (
-              <Eye onClick={() => setShowPassword(!showPassword)} />
+              <EyeClosed onClick={() => setShowPassword(!showPassword)} />
             )}
           </div>
           <input

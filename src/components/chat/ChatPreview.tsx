@@ -1,21 +1,17 @@
-import { useDispatch } from "react-redux";
 import type { ChatPreviewModel } from "../../constant/model/chat";
-import { TimeFromNowToProvidedDate } from "../../lib/utils/TimeConvert";
-import { setSelectedGroupChat } from "../../context/features/selectedChatGroup/selectedChatGroupSlice";
 import { useAppSelector } from "../../hooks/redux";
 import CircleIcon from "@mui/icons-material/Circle";
 function ChatPreview(chat: ChatPreviewModel) {
-  const dispatch = useDispatch();
   const selectedChatGroup = useAppSelector((state) => state.selectedChatGroup);
 
   const handleClick = () => {
-    dispatch(
-      setSelectedGroupChat({
-        id: chat.id,
-        avatar: chat.avatar,
-        name: chat.name,
-      })
-    );
+    // dispatch(
+    //   setSelectedGroupChat({
+    //     id: chat.id,
+    //     avatar: chat.avatar,
+    //     name: chat.name,
+    //   })
+    // );
   };
 
   return (
@@ -31,7 +27,7 @@ function ChatPreview(chat: ChatPreviewModel) {
     >
       <div className="flex-1 rounded-full h-full">
         <img
-          src={chat.avatar}
+          src={chat.avatar || "https://i.pravatar.cc/150?img=5"}
           alt="user avatar"
           className="rounded-full h-full"
         />
@@ -45,8 +41,8 @@ function ChatPreview(chat: ChatPreviewModel) {
         )}
         <h1 className="text-xl font-semibold">{chat.name}</h1>
         <div className="text-md text-[var(--text-low-emphasis)] flex justify-between">
-          <p>{chat.latestMessage}</p>
-          <p>{TimeFromNowToProvidedDate(chat.latestMessageTime)}</p>
+          <p>{chat.latestMessage?.content}</p>
+          {/* <p>{TimeFromNowToProvidedDate(chat.latestMessage.sendAt)}</p> */}
         </div>
       </div>
     </div>

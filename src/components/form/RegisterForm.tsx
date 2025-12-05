@@ -45,7 +45,7 @@ function RegisterForm() {
       await registerApi(data);
 
       createToastMessage("Register successfully!", "success");
-      setTimeout(() => navigate("/auth/login"), 2000);
+      navigate("/login");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         createToastMessage(

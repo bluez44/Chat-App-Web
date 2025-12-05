@@ -1,12 +1,17 @@
 import { Search } from "lucide-react";
 import MenuIcon from "@mui/icons-material/Menu";
-import { chatPreviews } from "../../constant/mock/chatPreview";
 import ChatPreviewList from "./ChatPreviewList";
 import { useState } from "react";
 import ChatSearchList from "./ChatSearchList";
+import type { ChatPreviewModel } from "../../constant/model/chat";
 
-function ChatList() {
+type ChatListProps = {
+  groupPreviews: ChatPreviewModel[];
+};
+
+function ChatList({ groupPreviews }: ChatListProps) {
   const [inputValue, setInputValue] = useState("");
+
   return (
     <>
       <div className="flex items-center justify-center gap-4 mb-4">
@@ -30,7 +35,7 @@ function ChatList() {
         {inputValue.length ? (
           <ChatSearchList />
         ) : (
-          <ChatPreviewList chatPreviews={chatPreviews} />
+          <ChatPreviewList chatPreviews={groupPreviews} />
         )}
       </div>
     </>

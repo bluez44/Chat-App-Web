@@ -10,7 +10,7 @@ type ChatPreviewListProps = {
 function ChatPreviewList({ chatPreviews }: ChatPreviewListProps) {
   return (
     <>
-      {chatPreviews.length > 0 ? (
+      {chatPreviews && chatPreviews.length > 0 ? (
         chatPreviews.map((chat) => <ChatPreview key={chat.id} {...chat} />)
       ) : (
         <div className="h-full flex items-center justify-center flex-col">

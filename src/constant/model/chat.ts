@@ -1,10 +1,28 @@
 interface ChatPreviewModel {
   id: number;
-  avatar: string;
+  avatar?: string;
   name: string;
-  latestMessage: string;
-  latestMessageTime: Date;
+  latestMessage: LatestMessageModel;
   isRead?: boolean;
+  privateChat: boolean;
+  createdAt: Date;
+}
+
+interface LatestMessageModel {
+  id: number;
+  content: string;
+  sendAt: Date;
+  sender: SenderModel;
+}
+
+interface SenderModel {
+  id: number;
+  userName: string;
+  avatar?: string;
+  fullName: string;
+  address?: string;
+  birthday?: Date;
+  createdAt?: Date;
 }
 
 interface MessageModel {
